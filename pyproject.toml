@@ -5,7 +5,10 @@ version = "0.1.0"
 requires-python = ">=3.14"
 readme = "README.md"
 authors = [{ name = "June", email = "junapur@proton.me" }]
-dependencies = []
+dependencies = [
+    "rich>=15.0.0",
+    "typer>=0.27.3",
+]
 
 [project.urls]
 Repository = "https://github.com/junapur/tagline"
@@ -13,7 +16,7 @@ Issues = "https://github.com/junapur/tagline/issues"
 Changelog = "https://github.com/junapur/tagline/blob/main/CHANGELOG.md"
 
 [project.scripts]
-tagline = "tagline:main"
+tagline = "tagline.cli:app"
 
 [build-system]
 requires = ["uv_build>=0.12.23, <0.13.0"]

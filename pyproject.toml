@@ -8,9 +8,9 @@ authors = [{ name = "June", email = "junapur@proton.me" }]
 dependencies = []
 
 [project.urls]
-Repository = "https://github.com/junapur/Tagline"
-Issues = "https://github.com/junapur/Tagline/issues"
-Changelog = "https://github.com/junapur/Tagline/blob/main/CHANGELOG.md"
+Repository = "https://github.com/junapur/tagline"
+Issues = "https://github.com/junapur/tagline/issues"
+Changelog = "https://github.com/junapur/tagline/blob/main/CHANGELOG.md"
 
 [project.scripts]
 tagline = "tagline:main"

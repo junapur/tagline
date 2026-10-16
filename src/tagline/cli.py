@@ -1,46 +1,29 @@
-from pathlib import Path
 from typing import Annotated
 
-import typer
+from cyclopts import App
+from cyclopts.types import Parameter, ResolvedExistingFile
 
-from tagline import __version__
+from tagline.output import err_console, out_console
 
-app = typer.Typer(add_completion=False)
-
-
-def version_callback(*, value: bool) -> None:
-    if value:
-        typer.echo(f"tagline {__version__}")
-        raise typer.Exit
-
-
-@app.command(
+app = App(
+    name="tagline",
     help="Audio tags, at a glance!",
-    epilog="For source code, issues, etc., see the [link=https://github.com/junapur/tagline]GitHub[/link]",
-    context_settings={"help_option_names": ["-h", "--help"]},
-    no_args_is_help=True,
+    help_epilogue="For source code, issues, etc., see the [GitHub](https://github.com/junapur/tagline)",
+    help_flags=["--help", "-h"],
+    version_flags=["--version", "-v"],
+    console=out_console,
+    error_console=err_console,
 )
+
+
+@app.default()
 def main(
-    file: Annotated[
-        Path,
-        typer.Argument(
-            help="The audio file to inspect.",
-            exists=True,
-            readable=True,
-            resolve_path=True,
-            file_okay=True,
-            dir_okay=False,
+    *files: Annotated[
+        ResolvedExistingFile,
+        Parameter(
+            help="The audio files to inspect.",
+            required=True,
         ),
     ],
-    *,
-    version: Annotated[
-        bool,
-        typer.Option(
-            "-v",
-            "--version",
-            help="Show version information and exit.",
-            callback=version_callback,
-            is_eager=True,
-        ),
-    ] = False,
-) -> None: ...
+) -> None:
+    pass

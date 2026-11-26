@@ -15,10 +15,14 @@ fmt:
 
 # Lint code
 lint:
-    cargo clippy -- -D warnings
+    cargo clippy --all-targets -- -D warnings
+
+# Run tests
+test:
+    cargo test
 
 # Check code
 check:
     cargo fmt --check
-    cargo clippy -- -D warnings
+    cargo clippy --all-targets -- -D warnings
     cargo test

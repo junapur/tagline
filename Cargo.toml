@@ -11,3 +11,6 @@ keywords = ["audio", "cli", "metadata", "music", "tags"]
 
 
 [dependencies]
+anstream = "1.0.0"
+anstyle = "1.0.14"
+clap = { version = "4.6.10", features = ["derive"] }

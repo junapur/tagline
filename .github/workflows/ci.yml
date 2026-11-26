@@ -1,0 +1,47 @@
+name: "CI"
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: "read"
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  RUST_BACKTRACE: "1"
+  CARGO_TERM_COLOR: "always"
+
+jobs:
+  quality:
+    name: "Quality"
+    runs-on: "ubuntu-latest"
+    timeout-minutes: 15
+
+    steps:
+      - name: "Checkout code"
+        uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: "Install Rust"
+        uses: "actions-rust-lang/setup-rust-toolchain@a188e68d0fd2bd36ad51dccb2b07ba6e75105f30" # v2.0.1
+        with:
+          build-warnings: "deny"
+          cache-save-if: ${{ github.ref == 'refs/heads/main' }}
+
+      - name: "Check formatting"
+        run: "cargo fmt --check"
+
+      - name: "Run clippy"
+        if: ${{ !cancelled() }}
+        run: "cargo clippy --locked --all-targets"
+
+      - name: "Run tests"
+        if: ${{ !cancelled() }}
+        run: "cargo test --locked"

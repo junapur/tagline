@@ -1,0 +1,13 @@
+[package]
+name = "tagline"
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+description = "Music tags, on the command line!"
+repository = "https://github.com/junapur/tagline"
+authors = ["June C <junapur@proton.me>"]
+categories = ["command-line-utilities", "multimedia::audio"]
+keywords = ["audio", "cli", "metadata", "music", "tags"]
+
+
+[dependencies]

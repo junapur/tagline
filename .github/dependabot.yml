@@ -1,0 +1,26 @@
+version: 2
+
+updates:
+  - package-ecosystem: "cargo"
+    directory: "/"
+    schedule: &schedule
+      interval: "weekly"
+      day: "monday"
+      time: "07:00"
+      timezone: "America/New_York"
+    commit-message: &commit-message
+      prefix: "chore"
+      include: "scope"
+    labels: ["dependencies", "rust"]
+
+  - package-ecosystem: "rust-toolchain"
+    directory: "/"
+    schedule: *schedule
+    commit-message: *commit-message
+    labels: ["dependencies", "rust", "toolchain"]
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule: *schedule
+    commit-message: *commit-message
+    labels: ["dependencies", "ci"]
